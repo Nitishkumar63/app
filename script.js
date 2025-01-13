@@ -33,7 +33,7 @@ const movieRecommendations = {
   Drama: {
     Relaxed: {
       Medium:
-        "Forrest Gump — an emotionally rich drama with a runtime of 110 minutes.",
+        "Forrest Gum — an emotionally rich drama with a runtime of 110 minutes.",
       Short:
         "The Pursuit of Happyness — an inspiring drama with a runtime of 67 minutes.",
       Long: "The Shawshank Redemption — a powerful drama with a runtime of 145 minutes.",
