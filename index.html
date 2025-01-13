@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Recommendation</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Movie Recommendation App</h1>
+        <h1 class="Recommendation">Movie Recommendation App</h1>
         <form id="movieForm">
             <div class="form-group">
                 <label for="genre">Preferred Genre</label>
                 <select id="genre" required>
+                    <option value="" disabled selected>Choose Genre</option>
                     <option value="Comedy">Comedy</option>
                     <option value="Action">Action</option>
                     <option value="Drama">Drama</option>
@@ -26,6 +27,7 @@
             <div class="form-group">
                 <label for="duration">Preferred Movie Duration</label>
                 <select id="duration" required>
+                    <option value="" disabled selected>Choose Duration</option>
                     <option value="Short">Short (under 90 minutes)</option>
                     <option value="Medium">Medium (90-120 minutes)</option>
                     <option value="Long">Long (over 120 minutes)</option>
@@ -35,6 +37,7 @@
             <div class="form-group">
                 <label for="mood">Mood</label>
                 <select id="mood" required>
+                    <option value="" disabled selected>Choose Mood</option>
                     <option value="Happy">Happy</option>
                     <option value="Relaxed">Relaxed</option>
                     <option value="Excited">Excited</option>
