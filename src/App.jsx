@@ -26,6 +26,7 @@ const SearchPage = () => {
     }
   };
 
+  console.log(selectedImage);
   useEffect(() => {
     const newCanvas = new fabric.Canvas(canvasRef.current, {
       preserveObjectStacking: true,
@@ -162,14 +163,14 @@ const SearchPage = () => {
         {images.map((image) => (
           <div key={image.id} className="relative">
             <img
-              src={image.src.medium}
+              src={image.src.small}
               alt={image.alt}
               className="w-full h-auto cursor-pointer"
               crossOrigin="anonymous"
-              onClick={() => handleImageSelect(image.src.medium)}
+              onClick={() => handleImageSelect(image.src.small)}
             />
             <button
-              onClick={() => handleImageSelect(image.src.medium)}
+              onClick={() => handleImageSelect(image.src.small)}
               className="absolute bottom-0 left-0 bg-black text-white p-2"
             >
               Select Image
