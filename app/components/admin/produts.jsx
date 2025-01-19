@@ -1,7 +1,7 @@
-import Navbar from "./components/navbar/navbar";
-import Footer from "./components/footer/footer";
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+
 export default function Home() {
   const products = [
     {
@@ -46,9 +46,14 @@ export default function Home() {
     },
   ];
 
+  // Function to handle delete action
+  const handleDelete = (productId) => {
+    console.log(`Delete product with ID: ${productId}`);
+    // Add your delete logic here, e.g., API call
+  };
+
   return (
-    <>
-      <Navbar />
+    <div className="py-6">
       <div className="px-10 grid grid-cols-1 mb-10 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div
@@ -60,8 +65,8 @@ export default function Home() {
               <Image
                 src={product.imageUrl}
                 alt={product.name}
-                width={300}
-                height={300}
+                width={200}
+                height={200}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -88,21 +93,16 @@ export default function Home() {
 
             {/* Action Buttons */}
             <div className="mt-4 flex space-x-4">
-              <Link href={`${"order/${6656656}"}`}>
-                <button className="bg-rose-600 text-white py-2 px-4 rounded-lg hover:bg-rose-700 transition">
-                  Buy Now
-                </button>
-              </Link>
-              <Link href={"/productDetalis"}>
-                <button className="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition">
-                  More Details
-                </button>
-              </Link>
+              <button
+                onClick={() => handleDelete(product.id)}
+                className="bg-rose-600 text-white py-2 px-4 rounded-lg hover:bg-rose-700 transition"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}
       </div>
-      <Footer />
-    </>
+    </div>
   );
 }
