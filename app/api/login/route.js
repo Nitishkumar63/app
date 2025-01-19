@@ -2,7 +2,7 @@ import "@/config/db";
 import UserSchema from "@/schema/user.Schema";
 import { NextResponse } from "next/server";
 import { createAccessToken, createRefreshToken } from "@/config/token";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export const POST = async (request) => {
   try {
