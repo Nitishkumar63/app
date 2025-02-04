@@ -18,6 +18,7 @@ const HomePage = () => {
     (state) => state.users
   );
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -25,6 +26,9 @@ const HomePage = () => {
       try {
         const users = await fetchUsers();
         dispatch(setUsers(users));
+        if (users.length > 0) {
+          dispatch(setSelectedUserPosts(users[0].id));
+        }
       } catch (err) {
         dispatch(setError("Failed to load users."));
       } finally {
@@ -45,13 +49,14 @@ const HomePage = () => {
     isLoading: postsLoading,
     error: postsError,
   } = useQuery(
-    ["posts", selectedUserPosts],
-    () => fetchPosts(selectedUserPosts),
+    ["posts", selectedUserPosts, page],
+    () => fetchPosts(selectedUserPosts, page),
     { enabled: !!selectedUserPosts }
   );
 
   const handleUserSelect = (id) => {
     dispatch(setSelectedUserPosts(id));
+    setPage(1);
   };
 
   return (
@@ -103,11 +108,34 @@ const HomePage = () => {
             <div className="text-center text-lg text-red-500 py-4">
               Error loading posts.
             </div>
+          ) : posts?.length > 0 ? (
+            <>
+              <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {posts.map((post) => (
+                  <PostCard key={post.id} title={post.title} body={post.body} />
+                ))}
+              </div>
+              <div className="flex justify-center gap-4 mt-6">
+                <button
+                  onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                  className="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50"
+                  disabled={page === 1}
+                >
+                  Previous
+                </button>
+
+                <button
+                  onClick={() => setPage((prev) => prev + 1)}
+                  className="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50"
+                  disabled={posts.length === 0}
+                >
+                  Next
+                </button>
+              </div>
+            </>
           ) : (
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {posts?.map((post) => (
-                <PostCard key={post.id} title={post.title} body={post.body} />
-              ))}
+            <div className="text-center text-lg text-gray-500 py-4">
+              No posts available.
             </div>
           )}
         </div>
